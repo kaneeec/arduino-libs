@@ -15,8 +15,7 @@ class BTController {
             START, KEY, EQUALS, VALUE
         };
 
-        const int baudRate;
-
+        int baudRate;
         SoftwareSerial serial;
         State state;
         String value;

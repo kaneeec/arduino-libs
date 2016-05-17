@@ -14,7 +14,8 @@ BTController::BTController(int rx, int tx, int baudRate) :
 
 bool BTController::read() {
     bool success = false;
-    String value = String("");
+    String newValue = String("");
+    this->value = String("");
 
     while (serial.available()) {
         char c = serial.read();
@@ -40,12 +41,12 @@ bool BTController::read() {
             case VALUE:
                 // we are finished with the value,
                 // store it if we have some and get back to start
-                if (c == '#' && value.length() > 0) {
+                if (c == '#' && newValue.length() > 0) {
                     state = START;
-                    this->value = value;
+                    this->value = newValue;
                     success = true;
                 } else {
-                    value += String(c);
+                    newValue += String(c);
                 }
                 break;
         }
